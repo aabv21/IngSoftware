@@ -27,7 +27,7 @@ fServicio = datetime(anyoF, mesF, diaF, hour=horF, minute=minF, second=segF)
 print(fServicio)
 
 # Funcion que determina las horas trabajadas dependiendo de si fue un dia de la semana o fin de semana
-
+# tuple(datetime, datetime) -> int
 def tiempoDeTrabajo(inicioDeServicio, finDeServicio):
     
     serv = finDeServicio - inicioDeServicio
@@ -54,6 +54,9 @@ def tiempoDeTrabajo(inicioDeServicio, finDeServicio):
             if serv > 60:            
                 horasTrabajadasFinSemanales += 1
                 serv = serv -3600
+            
+            else:
+                es_trabajo = True
         
         inicioDeServicio = inicioDeServicio + timedelta(hours=1)
         
@@ -70,18 +73,21 @@ class tarifa:
         
         self.tarifaSemanales = tarifaSemanales
         self.tarifaFinSemanales = tarifaFinSemanales
-    
+
     def tarifaFinDeSemana(self, numeroHorasFinSemanales):    
         return self.tarifaFinSemanales*numeroHorasFinSemanales
     
     def tarifaSemana(self, numeroHorasSemanales):   
         return self.tarifaSemanales*numeroHorasSemanales 
-    
+
+# Funcion calcularPrecio
+# tuple(float, int) -> float
+#
 def calcularPrecio(tarifa, tiempoDeServicio):
     
     precio = 0
     
-    precio = tarifa.tarifaFinDeSemana(tiempoDeServicio[0])
+    precio = tarifa.tarifaSemana(tiempoDeServicio[0])
     precio = precio + tarifa.tarifaFinDeSemana(tiempoDeServicio[1])
     
     return precio         
@@ -93,7 +99,7 @@ def calcularPrecio(tarifa, tiempoDeServicio):
 #300 hora semanal
 #500 hora fin de semana
 
-tf = tarifa(300, 500)
+tf = tarifa(int(input("tarifa dia de semana")), int(input("tarifa fin de semana")))
 minimo = timedelta(minutes= 15)
 maximo = timedelta(weeks=1)
 servicio = fServicio - iServicio
