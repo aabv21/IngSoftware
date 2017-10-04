@@ -59,14 +59,15 @@ def tiempoDeTrabajo(inicioDeServicio, finDeServicio):
 class tarifa:
     
     def __init__(self, tarifaSemanales, tarifaFinSemanales):
-        self.tarifaSemanales = tarifaSemanales
-        self.tarifaFinSemanales = tarifaFinSemanales
+        self.tarifaSemanales = float(int(tarifaSemanales * 100))/100
+        self.tarifaFinSemanales = float(int(tarifaFinSemanales * 100))/100
 
+    
     def tarifaFinDeSemana(self, numeroHorasFinSemanales):    
-        return self.tarifaFinSemanales*numeroHorasFinSemanales
+        return float(int(self.tarifaFinSemanales*numeroHorasFinSemanales*100))/100
     
     def tarifaSemana(self, numeroHorasSemanales):   
-        return self.tarifaSemanales*numeroHorasSemanales 
+        return float(int(self.tarifaSemanales*numeroHorasSemanales*100))/100
 
 
 # Funcion calcularPrecio
