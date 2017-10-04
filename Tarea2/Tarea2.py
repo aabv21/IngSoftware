@@ -59,7 +59,6 @@ def tiempoDeTrabajo(inicioDeServicio, finDeServicio):
 class tarifa:
     
     def __init__(self, tarifaSemanales, tarifaFinSemanales):
-        
         self.tarifaSemanales = tarifaSemanales
         self.tarifaFinSemanales = tarifaFinSemanales
 
@@ -69,9 +68,10 @@ class tarifa:
     def tarifaSemana(self, numeroHorasSemanales):   
         return self.tarifaSemanales*numeroHorasSemanales 
 
+
 # Funcion calcularPrecio
 # tuple(float, int) -> float
-#
+
 def calcularPrecio(tarifa, tiempoDeServicio):
     
     precio = 0
@@ -89,40 +89,47 @@ def calcularPrecio(tarifa, tiempoDeServicio):
 ###Programa
 #######################################################################
 
-# Inicio del servicio
-print("Introduzca la fecha y hora de inicio del Servicio dd-mm--aaaa-hh-mm-ss: ")
-diaI = int(input("dia: "))
-mesI = int(input("mes : "))
-anyoI = int(input("anyo: "))
-segI = int(input("segundos: "))
-minI = int(input("minutos: "))
-horI = int(input("horas: "))
-iServicio = datetime(anyoI, mesI, diaI, hour=horI, minute=minI, second=segI)
-print(iServicio)
 
-#Fin del servicio
-print("Introduzca la fecha y hora de fin del Servicio dd-mm--aaaa-hh-mm-ss: ")
-diaF = int(input("dia: "))
-mesF = int(input("mes : "))
-anyoF = int(input("anyo: "))
-segF = int(input("segundos: "))
-minF = int(input("minutos: "))
-horF = int(input("horas: "))
-fServicio = datetime(anyoF, mesF, diaF, hour=horF, minute=minF, second=segF)
-print(fServicio)
 
-tf = tarifa(int(input("tarifa dia de semana: ")), int(input("tarifa fin de semana: ")))
-
-tiempoDeServicio = tiempoDeTrabajo(iServicio, fServicio)
-print("Hora Semanales: " +str(tiempoDeServicio[0]) + " Hora Fin Semanales: " +str(tiempoDeServicio[1]))
-precio = calcularPrecio(tf, tiempoDeServicio)
-
-if precio == 0:
-    print("No hubo servicio")
+def inicializarPrograma():
+    # Inicio del servicio
+    print("Introduzca la fecha y hora de inicio del Servicio dd-mm-aaaa hh-mm-ss: ")
+    diaI = int(input("dia: "))
+    mesI = int(input("mes : "))
+    anyoI = int(input("anyo: "))
+    horI = int(input("horas: "))
+    minI = int(input("minutos: "))
+    segI = int(input("segundos: "))
     
-else:    
-    print("Usted debe pagar: "+str(precio)+ " bsf")
+    iServicio = datetime(anyoI, mesI, diaI, hour=horI, minute=minI, second=segI)
+    print(iServicio)
+
+    #Fin del servicio
+    print("Introduzca la fecha y hora de fin del Servicio dd-mm-aaaa hh-mm-ss: ")
+    diaF = int(input("dia: "))
+    mesF = int(input("mes : "))
+    anyoF = int(input("anyo: "))
+    horF = int(input("horas: "))
+    minF = int(input("minutos: "))
+    segF = int(input("segundos: "))
     
+    fServicio = datetime(anyoF, mesF, diaF, hour=horF, minute=minF, second=segF)
+    print(fServicio)
+
+    tf = tarifa(int(input("tarifa dia de semana: ")), int(input("tarifa fin de semana: ")))
+
+    tiempoDeServicio = tiempoDeTrabajo(iServicio, fServicio)
+    print("Hora Semanales: " +str(tiempoDeServicio[0]) + " Hora Fin Semanales: " +str(tiempoDeServicio[1]))
+    precio = calcularPrecio(tf, tiempoDeServicio)
+
+    if precio == 0:
+        print("No hubo servicio")
+        
+    else:    
+        print("Usted debe pagar: "+str(precio)+ " bsf")
+
+if __name__ == "__main__":
+    inicializarPrograma()    
      
     
     
