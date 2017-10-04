@@ -18,7 +18,7 @@ class TestTarea(unittest.TestCase):
         result = tiempoDeTrabajo(InicioServicio, FinalServicio)
         
         #69 horas semana + 23 fin de semana
-        self.assertEqual(result, [69, 23], msg="La prueba no fue satisfactoria")
+        self.assertEqual(result, [69, 23])
         
         ###PRUEBAS DE FRONTERA###
         # Viernes a las 23:59:59 hasta Sabado a las 0:00:00 (menor a 15 minutos)
@@ -28,7 +28,7 @@ class TestTarea(unittest.TestCase):
         result3 = tiempoDeTrabajo(InicioServicio3, FinalServicio3)
         
         #0 horas, no hay servicio
-        self.assertEqual(result3, [0, 0], msg="La prueba no fue satisfactoria")
+        self.assertEqual(result3, [0, 0])
         
         
         #Viernes a las 23:00:00 hasta Viernes a las 23:15:00 (exactamente 15 minutos)
@@ -38,7 +38,7 @@ class TestTarea(unittest.TestCase):
         result4 = tiempoDeTrabajo(InicioServicio4, FinalServicio4)
         
         #1 hora de semana
-        self.assertEqual(result4, [1, 0], msg="La prueba no fue satisfactoria")
+        self.assertEqual(result4, [1, 0])
         
         #Viernes 6 a las 23:00:00 hasta Viernes 13 a las 23:00:01 (mas de 1 semana)
         InicioServicio5 = datetime(2017, 10, 6, hour=23, minute=0, second=0)
@@ -47,18 +47,16 @@ class TestTarea(unittest.TestCase):
         result5 = tiempoDeTrabajo(InicioServicio5, FinalServicio5)
         
         #1 hora de semana
-        self.assertEqual(result5, [0, 0], msg="La prueba no fue satisfactoria")
+        self.assertEqual(result5, [0, 0])
         
         #Viernes 6 a las 23:00:00 hasta Viernes 13 a las 23:00:00 (exactamente 1 semana)
         InicioServicio6 = datetime(2017, 10, 6, hour=23, minute=0, second=0)
         FinalServicio6 = datetime(2017, 10, 13, hour=23, minute=0, second=0)
         
         result6 = tiempoDeTrabajo(InicioServicio6, FinalServicio6)
-        
-        p=str(result6)
-        
+                
         #1 hora de semana
-        self.assertEqual(result6, [120, 48], msg="La prueba no fue satisfactoria")
+        self.assertEqual(result6, [120, 48])
         
         ##OTRAS PRUEBAS###
         
@@ -68,10 +66,20 @@ class TestTarea(unittest.TestCase):
         
         result2 = tiempoDeTrabajo(InicioServicio2, FinalServicio2)
         
-        #1 hora de semana, a pesar de que solo se tomo 1 segundo del dia de semana
-        self.assertEqual(result2, [1, 0], msg="La prueba no fue satisfactoria")
+        #1 hora de semana, a pesar de que solo se tomo 1 segundo del dia de semana y 59 minutos del fin de semana
+        self.assertEqual(result2, [1, 0])
         
-    
+    def test_Tarifa(self):
+        ###PRUEBAS DE FUNCIONAMIENTO###
+        
+        # Tarifa de Bs399 con 99 centimos en dia de semana y Bs425 en fin de semana 
+        
+        tf1 = tarifa(399.99, 425)
+        
+        # Se trabajan 5 horas el dia de semana y 8 el fin de semana
+        
+        self.assertEqual(tf1.tarifaSemana(5), 1999.95)
+        self.assertEqual(tf1.tarifaFinDeSemana(8), 3400)
     
 
 if __name__ == "__main__":
