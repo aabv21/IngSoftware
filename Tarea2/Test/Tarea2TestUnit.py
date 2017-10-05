@@ -131,6 +131,21 @@ class TestTarea(unittest.TestCase):
 
         self.assertEqual(37374.31, result)
 
+        ###PRUEBAS DE FRONTERA###
+
+        #Errores de entrada en el tiempo de trabajo o en las tarifas daran como valores por defecto
+        #0 en tiempo y 0 en tarifa de dia de semana y 0 en tarifa de fin de semana respectivamente 
+        InicioServicio0 = datetime(2017, 5, 31, hour=0, minute=0, second=0)
+        FinalServicio0 = datetime(2017, 5, 3, hour=0, minute=0, second=0)
+        tiempo0 = tiempoDeTrabajo(InicioServicio0, FinalServicio0)
+        tf0 = tarifa(0,0)
+
+        result1 = calcularPrecio(tf1, tiempo0)
+        self.assertEqual(0, result1)
+        result2 = calcularPrecio(tf0, tiempo)
+        self.assertEqual(0, result2)
+        result3 = calcularPrecio(tf0, tiempo0)
+        self.assertEqual(0, result3)
 
 if __name__ == "__main__":
     unittest.main() 
