@@ -6,13 +6,14 @@ from tareaSoft2 import *
 #Heredamos de unittest, esto nos dara una serie de capacidades de prueba.
 class TestTarea(unittest.TestCase):
 
+    #Inicializacion del metodo SetUp
     def setUp(self):
 	
-		self.tf0 = tarifa(-1,-1)
-		self.tf1 = tarifa(399.99, 425)
-		self.tf2 = tarifa(150.50, 150.50)
-		self.tf3 = tarifa(399.99999, 400.3102568)
-		self.tf4 = tarifa(-8, -5)
+	self.tf0 = tarifa(-1,-1)
+	self.tf1 = tarifa(399.99, 425)
+	self.tf2 = tarifa(150.50, 150.50)
+	self.tf3 = tarifa(399.99999, 400.3102568)
+	self.tf4 = tarifa(-8, -5)
     
     #Tests de funcionamiento
     #Tests funcion Tiempo de Trabajo
