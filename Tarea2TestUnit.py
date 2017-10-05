@@ -5,6 +5,14 @@ from tareaSoft2 import *
 #nuestro script.
 #Heredamos de unittest, esto nos dara una serie de capacidades de prueba.
 class TestTarea(unittest.TestCase):
+
+    def setUp(self):
+	
+		self.tf0 = tarifa(-1,-1)
+		self.tf1 = tarifa(399.99, 425)
+		self.tf2 = tarifa(150.50, 150.50)
+		self.tf3 = tarifa(399.99999, 400.3102568)
+		self.tf4 = tarifa(-8, -5)
     
     #Tests de funcionamiento
     #Tests funcion Tiempo de Trabajo
@@ -79,41 +87,41 @@ class TestTarea(unittest.TestCase):
         
         # Tarifa de Bs399 con 99 centimos en dia de semana y Bs425 en fin de semana 
         
-        tf1 = tarifa(399.99, 425)
+        #tf1 = tarifa(399.99, 425)
         
         # Se trabajan 5 horas el dia de semana y 8 el fin de semana
         
-        self.assertEqual(tf1.tarifaSemana(5), 1999.95)
-        self.assertEqual(tf1.tarifaFinDeSemana(8), 3400)
+        self.assertEqual(self.tf1.tarifaSemana(5), 1999.95)
+        self.assertEqual(self.tf1.tarifaFinDeSemana(8), 3400)
 
         ###PRUEBAS DE FRONTERA###
         # Tarifa de dia de semana igual a fin de semana
-        tf1 = tarifa(150.50, 150.50)
+        #tf1 = tarifa(150.50, 150.50)
 
         #Es necesario que las tarifas de los dias de semanas siempre sean distintas a las del fin de semana
-        self.assertTrue(tf1.tarifaSemanales < tf1.tarifaFinSemanales)
+        self.assertTrue(self.tf2.tarifaSemanales < self.tf2.tarifaFinSemanales)
 
         #La manera en la que se resuelve este error es cambiando la tarifa del fin de semana al mismo valor de la tarifa
         # del dia de semana + 1
-        self.assertEqual(tf1.tarifaSemanales, tf1.tarifaFinSemanales - 1)
+        self.assertEqual(self.tf2.tarifaSemanales, self.tf2.tarifaFinSemanales - 1)
 
 
         # Tarifa con valores de decimas de centimo
-        tf1 = tarifa(399.99999, 400.3102568)
+        #tf1 = tarifa(399.99999, 400.3102568)
 
         #El numero es multiplicado por 100, redondeado HACIA ARRIBA, y dividido entre 00
-        ValorSemana = math.ceil(tf1.tarifaSemanales * 100)/100
-        ValorFindeSemana = math.ceil(tf1.tarifaFinSemanales * 100)/100
+        ValorSemana = math.ceil(self.tf3.tarifaSemanales * 100)/100
+        ValorFindeSemana = math.ceil(self.tf3.tarifaFinSemanales * 100)/100
 
         #Si la igualdad se mantiene, tiene 2 o menos digitos
-        self.assertEqual(tf1.tarifaSemanales, ValorSemana)
-        self.assertEqual(tf1.tarifaFinSemanales, ValorFindeSemana)
+        self.assertEqual(self.tf3.tarifaSemanales, ValorSemana)
+        self.assertEqual(self.tf3.tarifaFinSemanales, ValorFindeSemana)
 
         # Tarifa con valores negativos
-        tf1 = tarifa(-8, -5)
+        #tf1 = tarifa(-8, -5)
 
         # Al encontrar tarifas negativas se pondran en 0 por defecto, esto asegurara que el programa responda con un no hay servicio
-        self.assertTrue(tf1.tarifaSemanales == 0 and tf1.tarifaFinSemanales == 0, msg = tf1.tarifaFinSemanales)
+        self.assertTrue(self.tf4.tarifaSemanales == 0 and self.tf4.tarifaFinSemanales == 0, msg = self.tf4.tarifaFinSemanales)
 
     def test_calcularPrecio(self):
         ###PRUEBAS DE FUNCIONAMIENTO###
@@ -122,9 +130,9 @@ class TestTarea(unittest.TestCase):
         InicioServicio = datetime(2017, 5, 31, hour=3, minute=20, second=0)
         FinalServicio = datetime(2017, 6, 3, hour=23, minute=0, second=0)
         tiempo = tiempoDeTrabajo(InicioServicio, FinalServicio)
-        tf1 = tarifa(399.99, 425)
+        #tf1 = tarifa(399.99, 425)
 
-        result = calcularPrecio(tf1, tiempo)
+        result = calcularPrecio(self.tf1, tiempo)
 
         self.assertEqual(37374.31, result)
 
@@ -135,13 +143,13 @@ class TestTarea(unittest.TestCase):
         InicioServicio0 = datetime(2017, 5, 31, hour=0, minute=0, second=0)
         FinalServicio0 = datetime(2017, 5, 3, hour=0, minute=0, second=0)
         tiempo0 = tiempoDeTrabajo(InicioServicio0, FinalServicio0)
-        tf0 = tarifa(-1,-1)
+        #tf0 = tarifa(-1,-1)
 
-        result1 = calcularPrecio(tf1, tiempo0)
+        result1 = calcularPrecio(self.tf1, tiempo0)
         self.assertEqual(0, result1)
-        result2 = calcularPrecio(tf0, tiempo)
+        result2 = calcularPrecio(self.tf0, tiempo)
         self.assertEqual(0, result2)
-        result3 = calcularPrecio(tf0, tiempo0)
+        result3 = calcularPrecio(self.tf0, tiempo0)
         self.assertEqual(0, result3)
 
 if __name__ == "__main__":
