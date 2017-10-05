@@ -1,5 +1,5 @@
 import unittest, math
-from Tarea2.Tarea2 import *
+from Tarea2 import *
 
 #Clase TestTarea, esta se encargara de realizar las pruebas sobre las funciones de
 #nuestro script.
