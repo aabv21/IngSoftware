@@ -55,7 +55,7 @@ class TestTarea(unittest.TestCase):
                 
         self.assertEqual(result6, [120, 48])
         
-        ##OTRAS PRUEBAS##
+        ##OTRAS PRUEBAS###
         
         #Viernes a las 23:59:59 hasta Sabado a las 0:59:59
         InicioServicio2 = datetime(2017, 10, 6, hour=23, minute=59, second=59)
