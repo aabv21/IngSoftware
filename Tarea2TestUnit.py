@@ -6,13 +6,14 @@ from tareaSoft2 import *
 #Heredamos de unittest, esto nos dara una serie de capacidades de prueba.
 class TestTarea(unittest.TestCase):
 
+    #Inicializacion del metodo SetUp
     def setUp(self):
 	
-		self.tf0 = tarifa(-1,-1)
-		self.tf1 = tarifa(399.99, 425)
-		self.tf2 = tarifa(150.50, 150.50)
-		self.tf3 = tarifa(399.99999, 400.3102568)
-		self.tf4 = tarifa(-8, -5)
+	self.tf0 = tarifa(-1,-1)
+	self.tf1 = tarifa(399.99, 425)
+	self.tf2 = tarifa(150.50, 150.50)
+	self.tf3 = tarifa(399.99999, 400.3102568)
+	self.tf4 = tarifa(-8, -5)
     
     #Tests de funcionamiento
     #Tests funcion Tiempo de Trabajo
@@ -86,9 +87,6 @@ class TestTarea(unittest.TestCase):
         ###PRUEBAS DE FUNCIONAMIENTO###
         
         # Tarifa de Bs399 con 99 centimos en dia de semana y Bs425 en fin de semana 
-        
-        #tf1 = tarifa(399.99, 425)
-        
         # Se trabajan 5 horas el dia de semana y 8 el fin de semana
         
         self.assertEqual(self.tf1.tarifaSemana(5), 1999.95)
@@ -107,8 +105,6 @@ class TestTarea(unittest.TestCase):
 
 
         # Tarifa con valores de decimas de centimo
-        #tf1 = tarifa(399.99999, 400.3102568)
-
         #El numero es multiplicado por 100, redondeado HACIA ARRIBA, y dividido entre 00
         ValorSemana = math.ceil(self.tf3.tarifaSemanales * 100)/100
         ValorFindeSemana = math.ceil(self.tf3.tarifaFinSemanales * 100)/100
@@ -117,9 +113,7 @@ class TestTarea(unittest.TestCase):
         self.assertEqual(self.tf3.tarifaSemanales, ValorSemana)
         self.assertEqual(self.tf3.tarifaFinSemanales, ValorFindeSemana)
 
-        # Tarifa con valores negativos
-        #tf1 = tarifa(-8, -5)
-
+        # Tarifa con valores negativo
         # Al encontrar tarifas negativas se pondran en 0 por defecto, esto asegurara que el programa responda con un no hay servicio
         self.assertTrue(self.tf4.tarifaSemanales == 0 and self.tf4.tarifaFinSemanales == 0, msg = self.tf4.tarifaFinSemanales)
 
@@ -130,7 +124,6 @@ class TestTarea(unittest.TestCase):
         InicioServicio = datetime(2017, 5, 31, hour=3, minute=20, second=0)
         FinalServicio = datetime(2017, 6, 3, hour=23, minute=0, second=0)
         tiempo = tiempoDeTrabajo(InicioServicio, FinalServicio)
-        #tf1 = tarifa(399.99, 425)
 
         result = calcularPrecio(self.tf1, tiempo)
 
@@ -143,7 +136,6 @@ class TestTarea(unittest.TestCase):
         InicioServicio0 = datetime(2017, 5, 31, hour=0, minute=0, second=0)
         FinalServicio0 = datetime(2017, 5, 3, hour=0, minute=0, second=0)
         tiempo0 = tiempoDeTrabajo(InicioServicio0, FinalServicio0)
-        #tf0 = tarifa(-1,-1)
 
         result1 = calcularPrecio(self.tf1, tiempo0)
         self.assertEqual(0, result1)
